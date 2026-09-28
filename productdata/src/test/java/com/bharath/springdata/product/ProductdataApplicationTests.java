@@ -3,6 +3,7 @@ package com.bharath.springdata.product;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -87,5 +88,40 @@ class ProductdataApplicationTests {
 	public void findByNameAndDesc() {
 		List<Product> byNameAndDesc = repository.findByNameAndDesc("Galaxy S24", "Samsung" );
 		byNameAndDesc.forEach(p -> System.out.println(p.getPrice()));
+	}
+	
+	@Test
+	@Order(9)
+	public void findByPriceGreaterThan() {
+		List<Product> byPriceGreaterThan = repository.findByPriceGreaterThan(200d);
+		byPriceGreaterThan.forEach(p -> System.out.println(p.getName()));
+	}
+	
+	@Test
+	@Order(10)
+	public void findByDescContains() {
+		List<Product> byPriceGreaterThan = repository.findByDescContains("Samsung");
+		byPriceGreaterThan.forEach(p -> System.out.println(p.getName()));
+	}
+	
+	@Test
+	@Order(11)
+	public void findByPriceBetween() {
+		List<Product> byPriceGreaterThan = repository.findByPriceBetween(200d, 300d);
+		byPriceGreaterThan.forEach(p -> System.out.println(p.getName()));
+	}
+	
+	@Test
+	@Order(11)
+	public void findByDescLike() {
+		List<Product> byPriceGreaterThan = repository.findByDescLike("%apple%");
+		byPriceGreaterThan.forEach(p -> System.out.println(p.getName()));
+	}
+	
+	@Test
+	@Order(12)
+	public void findByIdsIn() {
+		List<Product> byIdIn = repository.findByIdIn(Arrays.asList(1, 2, 3));
+		byIdIn.forEach(p -> System.out.println(p.getName()));
 	}
 }
